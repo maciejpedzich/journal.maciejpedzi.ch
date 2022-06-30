@@ -1,0 +1,98 @@
+html, body, #__nuxt, #container {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+body, #__nuxt, #container, header, main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  margin-bottom: 2rem;
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+footer {
+  margin: 2.6rem 0 1.2rem 0;
+}
+
+article, main > div {
+  max-width: 64rem;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #485870;
+  color: #fff;
+  font-family: Arial;
+}
+
+main :is(h1, h2) {
+  text-align: center;
+}
+
+h1, h2, h3 {
+  font-weight: normal;
+}
+
+p {
+  line-height: 2.4rem;
+}
+
+a, a:visited {
+  color: #fff;
+}
+
+a:hover, a:active, a:focus {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+pre, code {
+  background-color: #2e3440;
+  overflow-x: auto;
+}
+
+pre {
+  font-size: 1rem;
+  padding: 0.6rem;
+}
+
+pre > code {
+  padding: 0;
+}
+
+code {
+  padding: 0.2rem;
+}
+
+blockquote {
+  margin-left: 0;
+  padding-left: 0.8rem;
+  border-left: 3px solid #fff;
+  font-style: italic;
+}
+
+ul {
+  margin: 1rem 0;
+  padding: 0;
+}
+
+.cmr2-text, .cmr2-text > span {
+  text-align: center;
+}
+
+.cmr2-text > span {
+  padding: 0.4rem 0.6rem;
+  border-left: 0.1rem solid #fff;
+}
+
+.cmr2-text > span:first-of-type {
+  border-left: none;
+}
