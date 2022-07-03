@@ -10,6 +10,11 @@ export default defineNuxtConfig({
       theme: 'nord'
     }
   },
+  nitro: {
+    prerender: {
+      routes: ['/sitemap.xml', '/rss.xml']
+    }
+  },
   vite: {
     plugins: [eslintPlugin()]
   }
