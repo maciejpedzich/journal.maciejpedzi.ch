@@ -8,19 +8,32 @@
       <span><NuxtLink to="/">home</NuxtLink></span>
       <span><NuxtLink to="/about">about</NuxtLink></span>
       <span>
-        <NuxtLink to="https://maciejpedzi.ch" target="_blank">maciejpedzi.ch</NuxtLink>
+        <NuxtLink to="/rss.xml" target="_blank">rss feed</NuxtLink>
       </span>
       <span>
-        <NuxtLink to="https://blog.maciejpedzi.ch" target="_blank">hashnode</NuxtLink>
+        <NuxtLink to="https://maciejpedzi.ch" target="_blank"
+          >maciejpedzi.ch</NuxtLink
+        >
       </span>
       <span>
-        <NuxtLink to="https://github.com/maciejpedzich" target="_blank">github</NuxtLink>
+        <NuxtLink to="https://blog.maciejpedzi.ch" target="_blank"
+          >hashnode</NuxtLink
+        >
       </span>
       <span>
-        <NuxtLink to="https://twitter.com/MaciejPedzich" target="_blank">twitter</NuxtLink>
+        <NuxtLink to="https://github.com/maciejpedzich" target="_blank"
+          >github</NuxtLink
+        >
       </span>
       <span>
-        <NuxtLink to="mailto:contact@maciejpedzi.ch" target="_blank">email me</NuxtLink>
+        <NuxtLink to="https://twitter.com/MaciejPedzich" target="_blank"
+          >twitter</NuxtLink
+        >
+      </span>
+      <span>
+        <NuxtLink to="mailto:contact@maciejpedzi.ch" target="_blank"
+          >email me</NuxtLink
+        >
       </span>
     </div>
   </header>
