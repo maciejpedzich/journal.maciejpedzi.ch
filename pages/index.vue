@@ -1,10 +1,11 @@
 <script setup lang="ts">
-const { data } = useAsyncData(
-  'all-articles',
-  () => queryContent('/')
-    .only(['_id', '_path', 'date_published', 'title'])
-    .find()
-)
+useHead({
+  title: "Home - Mac's Journal"
+});
+
+const { data } = useAsyncData('all-articles', () =>
+  queryContent('/').only(['_id', '_path', 'date_published', 'title']).find()
+);
 </script>
 
 <template>
@@ -28,7 +29,8 @@ ul {
   list-style-type: '-';
 }
 
-li > strong, li > span {
+li > strong,
+li > span {
   margin-left: 0.6rem;
 }
 </style>
