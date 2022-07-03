@@ -43,6 +43,6 @@ export default defineEventHandler(async (event) => {
   appendHeader(event, 'Content-Type', 'application/xml');
 
   // Optionally:
-  return feed.atom1();
-  // return feed.rss2();
+  // return feed.atom1();
+  return feed.rss2();
 });
