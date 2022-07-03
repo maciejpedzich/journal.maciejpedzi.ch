@@ -4,10 +4,22 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "prettier-format": "prettier --config .prettierrc --ignore-path .gitignore --write \"./**/*.{vue,ts}\"",
+    "lint": "eslint . --ext .vue,.ts --ignore-path .gitignore"
   },
   "devDependencies": {
     "@nuxt/content": "^2.0.0",
-    "nuxt": "^3.0.0-rc.4"
+    "@nuxtjs/eslint-config-typescript": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.3",
+    "@typescript-eslint/parser": "^5.30.3",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "eslint": "^8.19.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.1.1",
+    "nuxt": "^3.0.0-rc.4",
+    "prettier": "^2.7.1",
+    "sitemap": "^7.1.1",
+    "vite-plugin-eslint": "^1.6.1"
   }
 }
