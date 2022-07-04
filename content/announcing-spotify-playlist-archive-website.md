@@ -5,6 +5,7 @@ description: Mac is back on track, and he's proud to announce the official
 date_published: 2022-06-30T10:06:38+0100
 date: 2022-07-04T09:07:44.118Z
 image: /images/zac-durant-_6hzpu9hyfg-unsplash.jpg
+head.image.src: https://journal.maciejpedzi.ch/images/zac-durant-_6hzpu9hyfg-unsplash.jpg
 ---
 # Announcing spotify-playlist-archive's website
 
