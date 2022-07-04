@@ -16,7 +16,7 @@
         >
       </span>
       <span>
-        <NuxtLink to="https://blog.maciejpedzi.ch" target="_blank"
+        <NuxtLink to="https://hashnode.maciejpedzi.ch" target="_blank"
           >hashnode</NuxtLink
         >
       </span>
