@@ -10,8 +10,9 @@ export default defineEventHandler(async (event) => {
   const feed = new Feed({
     id: 'rss',
     title: "Mac's Journal - RSS feed",
-    copyright: `${currentYear} Maciej Pedzich`,
-    link: 'https://journal.maciejpedzi.ch'
+    description: "RSS feed for the latest Mac's journal articles",
+    link: 'https://journal.maciejpedzi.ch',
+    copyright: `${currentYear} Maciej Pedzich`
   });
 
   for (const doc of docs) {
