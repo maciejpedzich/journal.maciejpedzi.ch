@@ -11,8 +11,8 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Thumbnail", name: "head.image.src", widget: "image" }
+      - { label: "Thumbnail", name: "image", widget: "image" }
       - { label: "Body", name: "body", widget: "markdown" }
 publish_mode: editorial_workflow
 media_folder: "public/images"
-public_folder: "https://journal.maciejpedzi.ch/images"
+public_folder: "/images"
