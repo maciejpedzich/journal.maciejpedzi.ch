@@ -3,9 +3,6 @@ title: Announcing spotify-playlist-archive's website
 description: Mac is back on track, and he's proud to announce the official
   website for the spotify-playlist-archive project!
 date_published: 2022-06-30T10:06:38+0100
-date: 2022-07-04T09:07:44.118Z
-image: /images/zac-durant-_6hzpu9hyfg-unsplash.jpg
-head.image.src: https://journal.maciejpedzi.ch/images/zac-durant-_6hzpu9hyfg-unsplash.jpg
 ---
 It feels amazing to be back in the programming game, even for just two months before I'll inevitably have to start preparing for my finals coming up in May next year. But right now, I'm on the *last of a kind* holidays, so I'd better **make them count** big time. By that, I mean investing as much time as possible into developing all kinds of fun and useful projects... speaking of which, I'd like to reveal one of them: **spotify-playlist-archive's official website**. This one was initally supposed to be an entirely separate project, but having realised that Spotify would never accept my quota extension requests because of [section 4.3.a.i](https://developer.spotify.com/terms/#section-iv-restrictions) in their API's Terms of Service, I needed to come up with a Plan B. This resulted in me joining forces with [Mack](https://github.com/mackorone), who's the sole maintainer of [spotify-playlist-archive](https://github.com/mackorone/spotify-playlist-archive) project.
 
