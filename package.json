@@ -26,6 +26,7 @@
     "feed": "^4.2.2",
     "hast-util-to-html": "^8.0.3",
     "jsdom": "^20.0.0",
+    "nuxt-social-tags": "^1.2.2",
     "sitemap": "^7.1.1"
   }
 }
