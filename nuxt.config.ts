@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     enabled: true,
     opengraph: true,
     twitter: true,
+    locale: 'en-GB',
     img: 'https://journal.maciejpedzi.ch/images/banner.png',
     theme_color: '#485870',
     twitter_user: 'MaciejPedzich',

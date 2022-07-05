@@ -1,7 +1,13 @@
 <script setup lang="ts">
-useHead({
-  title: "Home - Mac's Journal"
-});
+const { updateSocialTags } = useSocialTags();
+
+const defaultMeta = {
+  title: "Mac's Journal",
+  description: "Maciej Pędzich's blog about all things Nuxt and Vue"
+};
+
+useHead(defaultMeta);
+updateSocialTags(defaultMeta);
 
 const { data } = useAsyncData('all-articles', () =>
   queryContent('/').only(['_id', '_path', 'date_published', 'title']).find()

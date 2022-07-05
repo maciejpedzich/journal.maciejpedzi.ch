@@ -1,7 +1,13 @@
 <script setup lang="ts">
-useHead({
-  title: "About - Mac's Journal"
-});
+const { updateSocialTags } = useSocialTags();
+
+const defaultMeta = {
+  title: "Mac's Journal",
+  description: "Maciej Pędzich's blog about all things Nuxt and Vue"
+};
+
+useHead(defaultMeta);
+updateSocialTags(defaultMeta);
 </script>
 
 <template>
