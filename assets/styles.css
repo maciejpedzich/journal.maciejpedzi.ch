@@ -58,7 +58,7 @@ p {
 
 a,
 a:visited {
-  color: #fff;
+  color: inherit;
 }
 
 a:hover,
@@ -105,9 +105,26 @@ ul {
 
 .cmr2-text > span {
   padding: 0.4rem 0.6rem;
-  border-left: 0.1rem solid #fff;
+  border-left: 0.05rem solid #fff;
 }
 
-.cmr2-text > span:first-of-type {
+.cmr2-text.nav > span {
+  color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.cmr2-text.nav a {
+  text-decoration: none;
+}
+
+.cmr2-text > span:first-of-type,
+.cmr2-text.nav > span:first-of-type {
   border-left: none;
+}
+
+.cmr2-text a:hover,
+.cmr2-text a:active,
+.cmr2-text a:focus,
+.router-link-active {
+  color: #fff;
 }

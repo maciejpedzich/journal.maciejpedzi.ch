@@ -4,7 +4,7 @@
       <span>mac's</span>
       <span>journal</span>
     </h1>
-    <div class="cmr2-text">
+    <div class="cmr2-text nav">
       <span><NuxtLink to="/">home</NuxtLink></span>
       <span><NuxtLink to="/about">about</NuxtLink></span>
       <span>
