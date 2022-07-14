@@ -2,7 +2,7 @@
 title: How to generate an RSS feed for a Nuxt Content site
 description: Learn how to write a server route for generating RSS feeds for your
   site powered by Nuxt Content v2
-date: 2022-07-15T14:43:35.983Z
+date: 2022-07-14T13:15:00.000Z
 ---
 Welcome back! In this very first *proper* journal entry, I'll show you how to write a server route for generating an RSS feed for a blog powered by Nuxt 3 and Nuxt Content v2. Keep in mind that this article assumes prior knowledge of these two technologies, so I won't go into too much detail regarding some of their key concepts mentioned here. Without further ado, let's just jump into it!
 
