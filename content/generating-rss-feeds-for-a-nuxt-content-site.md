@@ -4,7 +4,7 @@ description: Learn how to write a server route for generating RSS feeds for your
   site powered by Nuxt Content v2
 date: 2022-07-15T14:43:35.983Z
 ---
-Welcome back! In this very first *proper* journal entry, I'll describe how I've managed to write a server route for generating an RSS feed for my blog powered by Nuxt 3 and Nuxt Content v2. Keep in mind that this article assumes prior knowledge of these two technologies, so I won't go into too much detail regarding some of their key concepts mentioned here. Without further ado, let's just jump into it!
+Welcome back! In this very first *proper* journal entry, I'll show you how to write a server route for generating an RSS feed for a blog powered by Nuxt 3 and Nuxt Content v2. Keep in mind that this article assumes prior knowledge of these two technologies, so I won't go into too much detail regarding some of their key concepts mentioned here. Without further ado, let's just jump into it!
 
 ## Installing dependencies and laying the foundation
 
@@ -41,7 +41,7 @@ Not so fast, because there's a *teeny-tiny* detail I'll have to explain to you b
 
 ## Anatomy of a Nuxt Content post's `body`
 
-In order for you to fully understand the rest of the article, we need to talk about the body structure of each piece of content returned via [query builders](https://content.nuxtjs.org/guide/displaying/querying). According to the [`markdown` module configuration option](https://content.nuxtjs.org/api/configuration#markdown)'s description:
+In order for you to fully understand the rest of the article, we need to talk about the body structure of each piece of content returned via [query builders](https://content.nuxtjs.org/guide/displaying/querying). According to the [`markdown` configuration option](https://content.nuxtjs.org/api/configuration#markdown)'s description:
 
 > This module uses [remark](https://github.com/remarkjs/remark) and [rehype](https://github.com/remarkjs/remark-rehype) under the hood to compile markdown files into JSON AST that will be stored into the body variable.
 
@@ -101,7 +101,7 @@ yarn add hast-util-to-html
 
 But before we get down to using this package in our route, remember how I mentioned that Nuxt Content document's body format is very similar to that HAST standard? Bear in mind that **similar `!==` identical**, which becomes evident If you read HAST's `Element` node spec and compare it to the sample above.
 
-You'll notice that Nuxt Content's counterparts don't have either `properties` or `tagName` keys. They are, however, required in order for the converter to successfully output HTML. Therefore we have to *patch* root children node; and each root child'sown children and so on until we reach a `text` node; to include these keys. So add the following snippet right below the `docs` declaration:
+You'll notice that Nuxt Content's counterparts don't have either `properties` or `tagName` keys. They are, however, required in order for the converter to successfully output HTML. Therefore we have to *patch* root children node; and each root child's own children and so on until we reach a `text` node; to include these keys. So add the following snippet right below the `docs` declaration:
 
 ```typescript
 for (const doc of docs) {
@@ -164,14 +164,14 @@ export default defineEventHandler(async (event) => {
   }
 
   appendHeader(event, 'Content-Type', 'application/xml');
-  return feed.rss2();
 
+  return feed.rss2();
   // Optionally:
   // return feed.atom1();
 });
 ```
 
-As a bonus, you can even prerender this route by adding the following to the `nuxt.config.ts`:
+As a bonus, you can even prerender this route by adding the following to `nuxt.config.ts`:
 
 ```typescript
 import { defineNuxtConfig } from 'nuxt';
