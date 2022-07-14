@@ -23,8 +23,7 @@ main {
 
 article,
 main > div {
-  max-width: 80ch;
-  padding: 0 2rem;
+  max-width: min(80ch, 100vw);
 }
 
 body {
