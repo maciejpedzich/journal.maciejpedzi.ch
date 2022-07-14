@@ -23,7 +23,7 @@ main {
 
 article,
 main > div {
-  max-width: min(80ch, 100vw);
+  max-width: min(80ch, 90vw);
 }
 
 body {
