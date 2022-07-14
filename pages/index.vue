@@ -10,7 +10,10 @@ useHead(defaultMeta);
 updateSocialTags(defaultMeta);
 
 const { data } = useAsyncData('all-articles', () =>
-  queryContent('/').only(['_id', '_path', 'date', 'title']).find()
+  queryContent('/')
+    .only(['_id', '_path', 'date', 'title'])
+    .sort({ date: -1 })
+    .find()
 );
 </script>
 
