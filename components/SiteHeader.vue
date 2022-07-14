@@ -1,10 +1,10 @@
 <template>
   <header>
-    <h1 class="cmr2-text">
+    <h1 id="title" class="cmr2-text">
       <span>mac's</span>
       <span>journal</span>
     </h1>
-    <div class="cmr2-text nav">
+    <div id="nav" class="cmr2-text">
       <span><NuxtLink to="/">home</NuxtLink></span>
       <span><NuxtLink to="/about">about</NuxtLink></span>
       <span>
@@ -38,3 +38,45 @@
     </div>
   </header>
 </template>
+
+<style scoped>
+header,
+#nav {
+  width: 100%;
+}
+
+header {
+  margin-bottom: 2rem;
+}
+
+#title.cmr2-text > span {
+  border-left-width: 0.1rem;
+}
+
+#nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+@media only screen and (max-width: 625px) {
+  #nav {
+    justify-content: left;
+  }
+}
+
+#nav.cmr2-text > span {
+  color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
+  flex: 0 0 auto;
+}
+
+#nav.cmr2-text a {
+  text-decoration: none;
+}
+
+#nav.cmr2-text > span:first-of-type {
+  border-left: none;
+}
+</style>
