@@ -5,7 +5,6 @@ import { serverQueryContent } from '#content/server';
 export default defineEventHandler(async (event) => {
   // Obtain all docs and init RSS feed creator
 
-  const docs = await serverQueryContent(event).find();
   const currentYear = new Date().getFullYear();
   const feed = new Feed({
     id: 'rss',
@@ -14,17 +13,30 @@ export default defineEventHandler(async (event) => {
     link: 'https://journal.maciejpedzi.ch',
     copyright: `${currentYear} Maciej Pedzich`
   });
+  const docs = await serverQueryContent(event).sort({ date: -1 }).find();
 
   for (const doc of docs) {
     // Make sure to patch all child nodes to match the HAST spec
     // Reference: https://github.com/syntax-tree/hast
     const recursivelyPatchChildren = (node) => {
-      if (node.type === 'text') return node;
+      if (node.type === 'text') {
+        return node;
+      } else if (node.tag === 'code' && node.props.language) {
+        node.children = [
+          {
+            type: 'text',
+            value: node.props.code
+          }
+        ];
+
+        delete node.props.code;
+      }
 
       // Don't delete "old keys", because some element parsers may use them
       node.tagName = node.tag;
       node.properties = node.props;
       node.children = node.children.map(recursivelyPatchChildren);
+
       return node;
     };
 
