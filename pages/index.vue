@@ -33,6 +33,7 @@ const { data } = useAsyncData('all-articles', () =>
 <style scoped>
 ul {
   list-style-type: '-';
+  line-height: 1.8;
 }
 
 li > strong,
