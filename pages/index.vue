@@ -10,7 +10,7 @@ useHead(defaultMeta);
 updateSocialTags(defaultMeta);
 
 const { data } = useAsyncData('all-articles', () =>
-  queryContent('/').only(['_id', '_path', 'date_published', 'title']).find()
+  queryContent('/').only(['_id', '_path', 'date', 'title']).find()
 );
 </script>
 
@@ -19,7 +19,7 @@ const { data } = useAsyncData('all-articles', () =>
     <h2>the latest articles</h2>
     <ul>
       <li v-for="article in data" :key="article._id">
-        <strong>[ {{ article.date_published.substring(0, 10) }} ]</strong>
+        <strong>[ {{ article.date.substring(0, 10) }} ]</strong>
         <span>
           <NuxtLink :to="article._path">
             {{ article.title }}

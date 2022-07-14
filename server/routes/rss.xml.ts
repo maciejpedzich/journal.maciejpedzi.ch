@@ -10,16 +10,16 @@ export default defineEventHandler(async (event) => {
   const feed = new Feed({
     id: 'rss',
     title: "Mac's Journal - RSS feed",
-    description: "RSS feed for the latest Mac's journal articles",
+    description: "RSS feed for the latest Mac's Journal articles",
     link: 'https://journal.maciejpedzi.ch',
     copyright: `${currentYear} Maciej Pedzich`
   });
 
   for (const doc of docs) {
-    // Make sure to patch all child nodes to match the HAST model
+    // Make sure to patch all child nodes to match the HAST spec
     // Reference: https://github.com/syntax-tree/hast
     const recursivelyPatchChildren = (node) => {
-      if (!node.children) return node;
+      if (node.type === 'text') return node;
 
       // Don't delete "old keys", because some element parsers may use them
       node.tagName = node.tag;
@@ -34,16 +34,16 @@ export default defineEventHandler(async (event) => {
     feed.addItem({
       id: doc._id,
       title: doc.title,
+      image: 'https://journal.maciejpedzi.ch/images/banner.png',
       description: doc.description,
-      date: new Date(doc.date_published),
+      date: new Date(doc.date),
       link: new URL(doc._path, 'https://journal.maciejpedzi.ch').href,
       content
     });
   }
 
   appendHeader(event, 'Content-Type', 'application/xml');
-
+  return feed.rss2();
   // Optionally:
   // return feed.atom1();
-  return feed.rss2();
 });
