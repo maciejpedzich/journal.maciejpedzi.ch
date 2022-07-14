@@ -3,7 +3,7 @@ import eslintPlugin from 'vite-plugin-eslint';
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  css: ['~~/assets/styles.css'],
+  css: ['~~/assets/base.css'],
   modules: ['@nuxt/content', 'nuxt-social-tags'],
   content: {
     highlight: {

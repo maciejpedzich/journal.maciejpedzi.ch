@@ -17,21 +17,14 @@ main {
   align-items: center;
 }
 
-header {
-  margin-bottom: 2rem;
-}
-
 main {
   flex: 1 1 auto;
-}
-
-footer {
-  margin: 2.6rem 0 1.2rem 0;
 }
 
 article,
 main > div {
   max-width: 80ch;
+  padding: 0 2rem;
 }
 
 body {
@@ -53,7 +46,7 @@ h3 {
 }
 
 p {
-  line-height: 2.3;
+  line-height: 2.1;
 }
 
 a,
@@ -108,17 +101,7 @@ ul {
   border-left: 0.05rem solid #fff;
 }
 
-.cmr2-text.nav > span {
-  color: rgba(255, 255, 255, 0.4);
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-.cmr2-text.nav a {
-  text-decoration: none;
-}
-
-.cmr2-text > span:first-of-type,
-.cmr2-text.nav > span:first-of-type {
+.cmr2-text > span:first-of-type {
   border-left: none;
 }
 
