@@ -135,7 +135,7 @@ For you see, each child is a span with a couple more child spans containing styl
 }
 ```
 
-And as it turns out, the HAST to HTML converter incorrectly grabs the entire object as the end-value of a `style` attribute, leaving us with **a lot** of `<span style="[object Object]">(...)</span>` elements. Furthermore, as [Alex Riviere](https://alex.party) pointed out in [Frontend Horse Discord](https://frontend.horse/chat), style attributes are not allowed per [the W3C spec](https://validator.w3.org/feed/docs/warning/SecurityRiskAttr.html). So ideally we would want to end up with each code block being generated as something like:
+And as it turns out, the HAST to HTML converter incorrectly grabs the entire object as the end-value of a `style` attribute, leaving us with **a lot** of `<span style="[object Object]">(...)</span>` elements. Furthermore, as [Alex Riviere](https://alex.party) pointed out in [Frontend Horse Discord](https://frontend.horse/chat), style attributes are not allowed in RSS feeds per [the W3C spec](https://validator.w3.org/feed/docs/warning/SecurityRiskAttr.html). So ideally we would want to end up with each code block being generated as something like:
 
 ```html
 <code language="identifier">ACTUAL CODE HERE</code>
