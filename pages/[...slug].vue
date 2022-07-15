@@ -23,9 +23,6 @@ const dateFrags = (doc) =>
             {{ value }}
           </span>
         </p>
-        <p id="desc">
-          <em>{{ doc.description }}</em>
-        </p>
         <ContentRenderer :value="doc" />
       </template>
       <template #not-found>
@@ -36,10 +33,6 @@ const dateFrags = (doc) =>
 </template>
 
 <style scoped>
-#desc {
-  text-align: center;
-}
-
 #date-published {
   margin-top: 0;
 }
