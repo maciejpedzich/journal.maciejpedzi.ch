@@ -99,9 +99,9 @@ npm i hast-util-to-html
 yarn add hast-util-to-html
 ```
 
-But before we get down to using this package in our route, remember how I mentioned that Nuxt Content document's body format is very similar to that HAST standard? Bear in mind that **similar `!==` identical**, which becomes evident If you read HAST's `Element` node spec and compare it to the sample above.
+But before we get down to using this package in our route, remember how I mentioned that Nuxt Content document's body format is very similar to that HAST standard? Bear in mind that **similar does not mean identical**, which becomes evident If you read HAST's `Element` node spec and compare it to the sample above.
 
-You'll notice that Nuxt Content's counterparts don't have either `properties` or `tagName` keys. They are, however, required in order for the converter to successfully output HTML. Therefore we have to *patch* root children node; and each root child's own children and so on until we reach a `text` node; to include these keys. So add the following snippet right below the `docs` declaration:
+You'll notice that Nuxt Content's counterparts don't have either the `properties` or `tagName` keys. They are, however, required in order for the converter to successfully output HTML. Therefore we have to *patch* root children node; and each root child's own children and so on until we reach a `text` node; to include these keys. So add the following snippet right below the `docs` declaration:
 
 ```typescript
 for (const doc of docs) {
@@ -114,64 +114,76 @@ for (const doc of docs) {
 
     return node;
   };
-  
-  doc.body.children = doc.body.children.map(recursivelyPatchChildren);
 }
 ```
 
-Now we're good to import and use the HAST to HTML converter, but also add items to the RSS feed generator and finally send a feed body as a handler's response. Below is the entirety of `rss.xml.ts` server route:
+## BONUS: patching syntax-highlighted code blocks
+
+Feel free to skip this section if your articles don't include code snippets with syntax highlighting, but if they do, the  patch function modification I'm about to introduce is a must. This is due to the way these code snippets are structured within the tree. They're essentially `code` elements with `language` and `code` props specifying the programming language and block's content respectively.
+
+> So... what's the problem?
+
+For you see, each child is a span with a couple more child spans containing style `props` like this:
+
+```json
+{
+  "props": {
+    "style": {
+      "color": "#XXXXXX"
+    }
+  }
+}
+```
+
+And as it turns out, the HAST to HTML converter incorrectly grabs the entire object as the end-value of a `style` attribute, leaving us with **a lot** of `<span style="[object Object]">(...)</span>` elements. Furthermore, as [Alex Riviere](https://alex.party) pointed out in [Frontend Horse Discord](https://frontend.horse/chat), style attributes are not allowed per [the W3C spec](https://validator.w3.org/feed/docs/warning/SecurityRiskAttr.html). So ideally we would want to end up with each code block being generated as something like:
+
+```html
+<code language="identifier">ACTUAL CODE HERE</code>
+```
+
+Luckily for us, we don't have to traverse all these child nodes to obtain the original code snippet's content thanks to the aforementioned `code` prop of the container element, we just have to replace its children with a single text node with `value` set to that prop. So go ahead and replace the original `node.type === 'text'` check with the following:
 
 ```typescript
-import { toHtml } from 'hast-util-to-html';
-import { Feed } from 'feed';
-import { serverQueryContent } from '#content/server';
+if (node.type === 'text') {
+  return node;
+} else if (node.tag === 'code' && node.props.language) {
+  node.children = [
+    {
+      type: 'text',
+      value: node.props.code
+    }
+  ];
 
-export default defineEventHandler(async (event) => {
-  const blogUrl = 'https://www.example.com';
-  const feed = new Feed({
-    id: 'rss',
-    title: 'Your Cool Blog',
-    description: "RSS feed for Your Cool Blog",
-    link: blogUrl,
-    copyright: '2022-present Your Cool Blog'
-  });
-  const docs = await serverQueryContent(event).find();
+  delete node.props.code;
+}
+```
 
-  for (const doc of docs) {
-    const recursivelyPatchChildren = (node) => {
-      if (node.type === 'text') return node;
+## Piecing everything together
 
-      node.tagName = node.tag;
-      node.properties = node.props;
-      node.children = node.children.map(recursivelyPatchChildren);
+Now we're good to import and use the HAST to HTML converter, but also add items to the RSS feed generator. So insert this little chunk of code right below the `recursivelyPatchChildren` function's definition. Note that I've only included [Nuxt Content's native frontmatter parameters](https://content.nuxtjs.org/guide/writing/markdown#native-parameters) (and some other *built-in* content document properties), but if you want to include custom ones in each item, refer to feed package's documentation.
 
-      return node;
-    };
+```typescript
+doc.body.children = doc.body.children.map(recursivelyPatchChildren);
+const content = toHtml(doc.body);
 
-    doc.body.children = doc.body.children.map(recursivelyPatchChildren);
-    const content = toHtml(doc.body);
-
-    feed.addItem({
-      id: doc._id,
-      title: doc.title,
-      description: doc.description,
-      // date_published is a custom frontmatter property
-      // Make sure to replace it with a different one if needed
-      date: new Date(doc.date_published),
-      link: new URL(doc._path, blogUrl).href,
-      content
-    });
-  }
-
-  appendHeader(event, 'Content-Type', 'application/xml');
-
-  return feed.rss2();
-  // Optionally:
-  // return feed.atom1();
+feed.addItem({
+  id: doc._id,
+  title: doc.title,
+  description: doc.description,
+  link: new URL(doc._path, blogUrl).href,
+  content
 });
 ```
 
-As a bonus, you can even prerender this route by adding the following to `nuxt.config.ts`:
+And finally, place this outside the for loop:
+
+```typescript
+  appendHeader(event, 'Content-Type', 'application/xml');
+  return feed.rss2();
+  // Optionally: return feed.atom1();
+```
+
+As a bonus, you can prerender this route by adding the following to `nuxt.config.ts`:
 
 ```typescript
 import { defineNuxtConfig } from 'nuxt';
