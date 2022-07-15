@@ -119,7 +119,7 @@ for (const doc of docs) {
 
 ## BONUS: patching syntax-highlighted code blocks
 
-Feel free to skip this section if your articles don't include code snippets with syntax highlighting, but if they do, the  patch function modification I'm about to introduce is a must. This is due to the way these code snippets are structured within the tree. They're essentially `code` elements with `language` and `code` props specifying the programming language and block's content respectively.
+Feel free to skip this section if your articles don't include code snippets with syntax highlighting, but if they do, the  patch function modification I'll introduce is a must. This is due to the way these code snippets are structured within the tree. They're essentially `code` elements with `language` and `code` props specifying the programming language and block's content respectively.
 
 > So... what's the problem?
 
