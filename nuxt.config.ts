@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   modules: ['@nuxt/content', 'nuxt-social-tags'],
   content: {
     highlight: {
-      theme: 'nord'
+      theme: 'material-darker'
     }
   },
   socialtags: {
