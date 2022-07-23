@@ -1,4 +1,19 @@
 <script setup lang="ts">
+const { updateSocialTags } = useSocialTags();
+const route = useRoute();
+const [articleSlug] = route.params.slug as string[];
+
+const { data: page } = await useAsyncData(articleSlug, () =>
+  queryContent('/')
+    .where({ _path: `/${articleSlug}` })
+    .findOne()
+);
+
+if (page.value) {
+  const { title, description } = JSON.parse(JSON.stringify(page.value));
+  updateSocialTags({ title, description });
+}
+
 const dateFrags = (doc) =>
   new Intl.DateTimeFormat('en-US', {
     day: 'numeric',
@@ -6,11 +21,7 @@ const dateFrags = (doc) =>
     year: 'numeric'
   })
     .formatToParts(new Date(doc.date))
-    .filter(({ type }) => type !== 'literal')
-    .map((frag) => {
-      frag.value = frag.value.toLowerCase();
-      return frag;
-    });
+    .filter(({ type }) => type !== 'literal');
 </script>
 
 <template>
@@ -35,5 +46,6 @@ const dateFrags = (doc) =>
 <style scoped>
 #date-published {
   margin-top: 0;
+  text-transform: lowercase;
 }
 </style>
