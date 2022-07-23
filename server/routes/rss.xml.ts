@@ -22,6 +22,7 @@ export default defineEventHandler(async (event) => {
       if (node.type === 'text') {
         return node;
       } else if (node.tag === 'code' && node.props.language) {
+        node.props.lang = node.props.language;
         node.children = [
           {
             type: 'text',
@@ -29,10 +30,11 @@ export default defineEventHandler(async (event) => {
           }
         ];
 
+        // Prevent inclusion of redundant props
+        delete node.props.language;
         delete node.props.code;
       }
 
-      // Don't delete "old keys", because some element parsers may use them
       node.tagName = node.tag;
       node.properties = node.props;
       node.children = node.children.map(recursivelyPatchChildren);
