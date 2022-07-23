@@ -1,5 +1,6 @@
 ---
 title: How to generate an RSS feed for a Nuxt Content site
+category: tutorial
 description: Learn how to write a server route for generating RSS feeds for your
   site powered by Nuxt Content v2
 date: 2022-07-14T13:15:00.000Z
@@ -138,7 +139,7 @@ For you see, each child is a span with a couple more child spans containing styl
 And as it turns out, the HAST to HTML converter incorrectly grabs the entire object as the end-value of a `style` attribute, leaving us with **a lot** of `<span style="[object Object]">(...)</span>` elements. Furthermore, as [Alex Riviere](https://alex.party) pointed out in [Frontend Horse Discord](https://frontend.horse/chat), style attributes are not allowed in RSS feeds per [the W3C spec](https://validator.w3.org/feed/docs/warning/SecurityRiskAttr.html). So ideally we would want to end up with each code block being generated as something like:
 
 ```html
-<code language="identifier">ACTUAL CODE HERE</code>
+<code lang="identifier">ACTUAL CODE HERE</code>
 ```
 
 Luckily for us, we don't have to traverse all these child nodes to obtain the original code snippet's content thanks to the aforementioned `code` prop of the container element, we just have to replace its children with a single text node with `value` set to that prop. So go ahead and replace the original `node.type === 'text'` check with the following:
@@ -147,6 +148,7 @@ Luckily for us, we don't have to traverse all these child nodes to obtain the or
 if (node.type === 'text') {
   return node;
 } else if (node.tag === 'code' && node.props.language) {
+  node.props.lang = node.props.language;
   node.children = [
     {
       type: 'text',
@@ -154,6 +156,7 @@ if (node.type === 'text') {
     }
   ];
 
+  delete node.props.language;
   delete node.props.code;
 }
 ```
@@ -178,9 +181,9 @@ feed.addItem({
 And finally, place this outside the for loop:
 
 ```typescript
-  appendHeader(event, 'Content-Type', 'application/xml');
-  return feed.rss2();
-  // Optionally: return feed.atom1();
+ appendHeader(event, 'Content-Type', 'application/xml');
+ return feed.rss2();
+ // Optionally: return feed.atom1();
 ```
 
 As a bonus, you can prerender this route by adding the following to `nuxt.config.ts`:
