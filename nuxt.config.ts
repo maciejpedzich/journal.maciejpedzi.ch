@@ -17,7 +17,7 @@ export default defineNuxtConfig({
     locale: 'en-GB',
     img: 'https://journal.maciejpedzi.ch/images/banner.png',
     theme_color: '#485870',
-    twitter_user: 'MaciejPedzich',
+    twitter_user: '@MaciejPedzich',
     twitter_card: 'summary_large_image'
   },
   nitro: {
